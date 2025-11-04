@@ -1,22 +1,22 @@
 /*
  * Lab 3, Task 3
- * Student Name, Student ID
+ * Student Name: [İsmini Yaz]
+ * Student ID: [Numaranı Yaz]
  *
- * Implement basic string handling functions.
- * Write your own versions of:
- *   - my_strlen (finds string length)
- *   - my_strcpy (copies string from src to dest)
+ * Manual string handling:
+ *   - count string length (without using strlen)
+ *   - copy string from src to dest (without using strcpy)
  *
  * Rules:
- *   - Do not use <string.h> functions for strlen/strcpy.
- *   - Use loops and manual pointer/array access.
+ *   - Do not use <string.h>
+ *   - Use loops or pointer arithmetic
  *
  * Example:
- *   char s[] = "hello";
- *   int len = my_strlen(s);   // should return 5
- *
+ *   char text[] = "hello";
+ *   int len = my_strlen(text); // 5
  *   char buffer[100];
- *   my_strcpy(buffer, s);     // buffer now contains "hello"
+ *   my_strcpy(buffer, text);
+ *   printf("%s\n", buffer); // hello
  */
 
 #include <stdio.h>
@@ -26,25 +26,44 @@ int my_strlen(const char *str);
 void my_strcpy(char *dest, const char *src);
 
 int main(void) {
-    // TODO: Test your functions here
-    char test[] = "Programming in C";
-    char copy[100];
-
-    int len = my_strlen(test);
+    char text[] = "hello";
+    
+    int len = my_strlen(text);
     printf("Length: %d\n", len);
 
-    my_strcpy(copy, test);
-    printf("Copy: %s\n", copy);
+    char buffer[100];
+    my_strcpy(buffer, text);
+    printf("Copied string: %s\n", buffer);
 
     return 0;
 }
 
-// Implement functions below
+// Karakter dizisinin uzunluğunu döndür
 int my_strlen(const char *str) {
-    // TODO: count characters until '\0'
-    return 0; // placeholder
+    int len = 0;
+    
+    // str[len] 'null' karakteri ('\0') olmadığı sürece
+    // sayacı (len) artırarak döngüye devam et.
+    while (str[len] != '\0') {
+        len++;
+    }
+    
+    // Döngü bittiğinde, len bize karakter sayısını (uzunluğu) verir.
+    return len;
 }
 
+// src dizisini dest'e kopyala
 void my_strcpy(char *dest, const char *src) {
-    // TODO: copy characters until '\0'
+    int i = 0;
+    
+    // Kaynak (src) dizedeki karakter '\0' olmadığı sürece kopyala.
+    while (src[i] != '\0') {
+        dest[i] = src[i];
+        i++;
+    }
+    
+    // Döngü bittikten sonra, kopyalanan dizeyi (dest)
+    // sonlandırmak için 'null' karakterini en sona ekle.
+    // Bu çok önemlidir!
+    dest[i] = '\0';
 }

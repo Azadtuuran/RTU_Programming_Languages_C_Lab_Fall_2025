@@ -1,21 +1,20 @@
 /*
  * Lab 3, Task 2
- * Student Name, Student ID
+ * Student Name: [İsmini Yaz]
+ * Student ID: [Numaranı Yaz]
  *
- * Practice using pointers as function parameters.
- * Implement:
- *   - swap (exchange values of two ints)
- *   - modify_value (multiply given int by 2)
+ * Pointers as function parameters:
+ *   - swap values of two integers
+ *   - modify integer value by doubling it
  *
  * Rules:
- *   - Use pointers to modify variables in the caller.
- *   - Demonstrate changes in main.
+ *   - Use pointers to modify values in place.
+ *   - No return values, only pointer parameters.
  *
  * Example:
- *   int a = 5, b = 10;
- *   swap(&a, &b);   // now a = 10, b = 5
- *
- *   modify_value(&a); // now a = 20
+ *   int a = 3, b = 7;
+ *   swap(&a, &b); // a=7, b=3
+ *   modify_value(&a); // a=14
  */
 
 #include <stdio.h>
@@ -26,6 +25,7 @@ void modify_value(int *x);
 
 int main(void) {
     int a = 3, b = 7;
+
     printf("Before swap: a=%d, b=%d\n", a, b);
     swap(&a, &b);
     printf("After swap: a=%d, b=%d\n", a, b);
@@ -36,11 +36,20 @@ int main(void) {
     return 0;
 }
 
-// Implement functions below
+// İki tam sayının değerlerini yer değiştir
 void swap(int *x, int *y) {
-    // TODO: swap values using a temporary variable
+    // *x, x'in gösterdiği adresteki *değeri* alır
+    // *y, y'nin gösterdiği adresteki *değeri* alır
+    
+    int temp = *x; // x'in gösterdiği değeri (a'nın değeri) geçici değişkene kaydet
+    *x = *y;       // y'nin gösterdiği değeri (b'nin değeri) x'in gösterdiği yere (a) ata
+    *y = temp;     // Geçici değişkendeki (eski a'nın değeri) y'nin gösterdiği yere (b) ata
 }
 
+// Değeri 2 ile çarp
 void modify_value(int *x) {
-    // TODO: multiply value by 2
+    // x'in gösterdiği adresteki değeri al, 2 ile çarp ve sonucu aynı adrese geri yaz.
+    *x = *x * 2;
+    // Veya daha kısa haliyle:
+    // *x *= 2;
 }
