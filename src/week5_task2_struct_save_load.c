@@ -1,7 +1,8 @@
 // week5_task2_struct_save_load.c
 // Task 2: Save and load structured records from a file
 // Week 5 – Files & Modular Programming
-// TODO: Complete function implementations and file handling logic.
+// Author: [Your Name]
+// Student ID: [Your ID]
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,23 +28,43 @@ int main(void) {
 
     const char *filename = "student.txt";
 
-    // TODO: Call save_student() to save student data to file
-    // TODO: Call load_student() to read data back into a new struct
-    // TODO: Print loaded data to confirm correctness
+    // Save the student record
+    printf("Saving student to file...\n");
+    save_student(s1, filename);
+
+    // Load the student record
+    printf("Loading student from file...\n");
+    Student s2 = load_student(filename);
+
+    // Print loaded data to confirm correctness
+    printf("Loaded student: %s, %d, GPA %.2f\n", s2.name, s2.age, s2.gpa);
 
     return 0;
 }
 
-// TODO: Implement save_student()
-// Open file for writing, check errors, write fields, then close file
+// Saves a student struct to a file
 void save_student(Student s, const char *filename) {
-    // ...
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error: Could not open file %s for writing.\n", filename);
+        exit(1);
+    }
+
+    fprintf(fp, "%s %d %.2f\n", s.name, s.age, s.gpa);
+    fclose(fp);
 }
 
-// TODO: Implement load_student()
-// Open file for reading, check errors, read fields, then close file
+// Loads a student struct from a file
 Student load_student(const char *filename) {
     Student s;
-    // ...
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Error: Could not open file %s for reading.\n", filename);
+        exit(1);
+    }
+
+    fscanf(fp, "%s %d %f", s.name, &s.age, &s.gpa);
+    fclose(fp);
+
     return s;
 }
