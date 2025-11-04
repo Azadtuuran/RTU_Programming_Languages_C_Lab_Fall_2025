@@ -5,7 +5,7 @@
  * Description:
  *   Demonstrates creation and usage of a dynamic array using malloc.
  *   Students should allocate memory for an integer array, fill it with data,
- *   compute something (e.g., average), and then free the memory.
+ *   compute sum and average, and then free the memory.
  */
 
 #include <stdio.h>
@@ -21,18 +21,35 @@ int main(void) {
         return 1;
     }
 
-    // TODO: Allocate memory for n integers using malloc
-    // Example: arr = malloc(n * sizeof(int));
+    // Allocate memory for n integers using malloc
+    arr = (int *)malloc(n * sizeof(int));
 
-    // TODO: Check allocation success
+    // Check if allocation was successful
+    if (arr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
-    // TODO: Read n integers from user input and store in array
+    printf("Enter %d integers: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
 
-    // TODO: Compute sum and average
+    // Compute sum
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
 
-    // TODO: Print the results
+    // Compute average
+    float avg = (float)sum / n;
 
-    // TODO: Free allocated memory
+    // Print results
+    printf("Sum = %d\n", sum);
+    printf("Average = %.2f\n", avg);
+
+    // Free allocated memory
+    free(arr);
 
     return 0;
 }
